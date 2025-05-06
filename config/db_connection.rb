@@ -5,4 +5,11 @@
 require 'sequel'
 
 # непосредственно подключение к БД
-DB = Sequel.sqlite('./db/test.db')
+begin
+  DB = Sequel.sqlite('./db/test.db')
+rescue Sequel::DatabaseConnectionError => e
+  puts "Ошибка подключения к базе данных: #{e.message}"
+  exit(1)
+end
+
+Sequel::Model.db = DB
