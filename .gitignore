@@ -1,0 +1,15 @@
+/db/*.db
+/db/*.sqlite3
+
+*.gem
+*.rbc
+.ruby-version
+.ruby-gemset
+.bundle
+/vendor/bundle
+
+.DS_Store
+Thumbs.db
+
+.idea/
+.vscode/
