@@ -12,4 +12,5 @@ rescue Sequel::DatabaseConnectionError => e
   exit(1)
 end
 
+# установка соедниения с БД умолчанию для всех моделей
 Sequel::Model.db = DB

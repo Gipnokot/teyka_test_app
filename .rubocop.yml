@@ -1,12 +1,14 @@
 AllCops:
   TargetRubyVersion: 3.4
   NewCops: enable
+  SuggestExtensions: false
   Exclude:
     - "db/**/*"
 
 plugins:
   - rubocop-rspec
   - rubocop-sequel
+  - rubocop-factory_bot
 
 Layout/LineLength:
   Max: 120
