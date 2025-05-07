@@ -5,7 +5,7 @@ FactoryBot.define do
   factory :user do
     sequence(:name) { |n| "User#{n}" }
     bonus { 10_000 }
-    template
+    association :template, strategy: :create
 
     trait :ivan do
       name { 'Иван' }

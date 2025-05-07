@@ -16,6 +16,5 @@ class User < Sequel::Model
     validates_type Integer, :template_id
     validates_type BigDecimal, :bonus, allow_nil: true
     validates_max_length 255, :name
-    validates_foreign_key :template_id, :templates
   end
 end
