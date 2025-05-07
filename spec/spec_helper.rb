@@ -3,6 +3,7 @@
 # spec/spec_helper.rb
 require_relative '../config/db_connection'
 require 'factory_bot'
+require 'fileutils'
 
 # подключение моделей
 Dir[File.join(__dir__, '../models', '*.rb')].each { |file| require file }
@@ -26,10 +27,22 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
-  # загружаем schema.sql перед запуском тестов, если таблиц ещё нет
+  # создаем копию базы данных перед запуском тестов
   config.before(:suite) do
     DB.run('PRAGMA foreign_keys = ON;')
 
+    # Создаем копию базы данных
+    test_db_path = './db/test.db'
+    test_copy_db_path = './db/test_spec.db'
+
+    # Если копия базы данных не существует, создаем ее
+    FileUtils.cp(test_db_path, test_copy_db_path) unless File.exist?(test_copy_db_path)
+
+    # Настроим DB для использования копии базы данных
+    DB = Sequel.sqlite(test_copy_db_path)
+    Sequel::Model.db = DB
+
+    # если таблицы не существуют, применяем схему
     unless DB.table_exists?(:users) && DB.table_exists?(:templates)
       puts '[setup] Применяю schema.sql...'
       schema = File.read(File.expand_path('../db/schema.sql', __dir__))

@@ -1,25 +1,9 @@
 # frozen_string_literal: true
 
-# factories/users.rb
 FactoryBot.define do
   factory :user do
-    sequence(:name) { |n| "User#{n}" }
-    bonus { 10_000 }
-    association :template, strategy: :create
-
-    trait :ivan do
-      name { 'Иван' }
-      template { association :template, :bronze }
-    end
-
-    trait :marina do
-      name { 'Марина' }
-      template { association :template, :silver }
-    end
-
-    trait :zhenya do
-      name { 'Женя' }
-      template { association :template, :gold }
-    end
+    name { 'Test User' }
+    bonus { BigDecimal('10000') }
+    template { create(:template) }
   end
 end

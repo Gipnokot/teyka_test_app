@@ -1,18 +1,15 @@
 # frozen_string_literal: true
 
-# factories/operations.rb
 FactoryBot.define do
   factory :operation do
-    user { create(:user) }
-    cashback { 10.5 }
-    cashback_percent { 5.0 }
-    discount { 15.0 }
-    discount_percent { 10.0 }
-    check_summ { 100.0 }
-    write_off { nil }
+    user
+    cashback         { BigDecimal('0') }
+    cashback_percent { BigDecimal('0') }
+    discount         { BigDecimal('0') }
+    discount_percent { BigDecimal('0') }
+    write_off        { nil }
+    check_summ       { BigDecimal('100') }
+    done             { false }
     allowed_write_off { nil }
-    done { false }
   end
 end
-
-
