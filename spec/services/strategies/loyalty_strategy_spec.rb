@@ -4,7 +4,7 @@
 require 'spec_helper'
 require_relative '../../../services/strategies/loyalty_strategy'
 
-RSpec.describe LoyaltyStrategy, '#initialize' do
+RSpec.describe LoyaltyStrategy do
   subject(:strategy) { described_class.new(template) }
 
   let(:template) { instance_double('Template', discount: 12, cashback: 7) }

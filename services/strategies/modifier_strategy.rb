@@ -4,7 +4,6 @@
 class ModifierStrategy
   attr_reader :percent_discount, :percent_cashback
 
-  # product - экземпляр модели Product
   def initialize(product)
     @percent_cashback = 0.0
 

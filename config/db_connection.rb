@@ -10,11 +10,9 @@ db_file = if ENV['RACK_ENV'] == 'test'
             './db/test.db'      # основная БД
           end
 
-# Проверка существования директории
-FileUtils.mkdir_p(File.dirname(db_file)) unless File.exist?(File.dirname(db_file))
-
 begin
   DB = Sequel.sqlite(db_file)
+  DB.run('PRAGMA foreign_keys = ON;')
   puts "Подключение к базе данных: #{db_file}"
 rescue Sequel::DatabaseConnectionError => e
   puts "Ошибка подключения к базе данных: #{e.message}"

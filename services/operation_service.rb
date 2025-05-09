@@ -1,17 +1,21 @@
-# services/operation_service.rb
 # frozen_string_literal: true
 
+# services/operation_service.rb
 require_relative 'strategies/loyalty_strategy'
 require_relative 'strategies/modifier_strategy'
 require_relative 'strategies/strategies_registry'
+require_relative 'position_calculator'
 
 class OperationService
   def initialize(user_id, positions)
-    @user      = User[user_id] or raise "User #{user_id} not found"
+    @user = User[user_id]
+    raise ArgumentError, "User #{user_id} not found" unless @user
+
     @positions = positions
-    @loyalty   = StrategiesRegistry::LOYALTY
-                 .fetch(@user.template.name) { raise "Loyalty strategy for #{@user.template.name} not found" }
-                 .new(@user.template)
+    @user.template.name.downcase.capitalize
+    @loyalty = StrategiesRegistry::LOYALTY
+               .fetch(@user.template.name) { raise "Loyalty strategy for #{@user.template.name} not found" }
+               .new(@user.template)
   end
 
   def calculate
@@ -35,7 +39,7 @@ class OperationService
     total_discount = results.sum { |r| r[:discount_value] }
     total_cashback = results.sum { |r| r[:cashback_value] }
     total_price    = total_raw - total_discount
-    bonus_max      = pos_calculators.sum(&:raw_sum)
+    bonus_max = pos_calculators.select(&:loyalty_eligible?).sum(&:raw_sum)
 
     {
       status: 'success',

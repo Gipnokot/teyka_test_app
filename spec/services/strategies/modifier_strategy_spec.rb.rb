@@ -4,7 +4,7 @@
 require 'spec_helper'
 require_relative '../../../services/strategies/modifier_strategy'
 
-RSpec.describe ModifierStrategy, '#initialize' do
+RSpec.describe ModifierStrategy do
   subject(:strategy) { described_class.new(product) }
 
   context "when product.type is 'discount'" do
@@ -23,7 +23,6 @@ RSpec.describe ModifierStrategy, '#initialize' do
     let(:product) { instance_double('Product', type: 'increased_cashback', value: '8') }
 
     it 'uses product.value for percent_discount' do
-      # В логике текущей стратегии value идёт в discount, не в cashback
       expect(strategy.percent_discount).to eq(8.0)
     end
 

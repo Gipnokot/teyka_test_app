@@ -4,6 +4,8 @@
 require_relative '../config/db_connection'
 require 'factory_bot'
 require 'fileutils'
+require 'bigdecimal'
+require 'bigdecimal/util'
 
 # подключение моделей
 Dir[File.join(__dir__, '../models', '*.rb')].each { |file| require file }
@@ -39,7 +41,7 @@ RSpec.configure do |config|
     FileUtils.cp(test_db_path, test_copy_db_path) unless File.exist?(test_copy_db_path)
 
     # Настроим DB для использования копии базы данных
-    DB = Sequel.sqlite(test_copy_db_path)
+    # DB = Sequel.sqlite(test_copy_db_path)
     Sequel::Model.db = DB
 
     # если таблицы не существуют, применяем схему

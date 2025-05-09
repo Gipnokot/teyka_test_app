@@ -9,10 +9,10 @@ module StrategiesRegistry
     'Bronze' => LoyaltyStrategy,
     'Silver' => LoyaltyStrategy,
     'Gold' => LoyaltyStrategy
-  }
+  }.freeze
 
   MODIFIER = {
     'discount' => ModifierStrategy,
     'increased_cashback' => ModifierStrategy
-  }
+  }.freeze
 end

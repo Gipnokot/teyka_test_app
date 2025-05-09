@@ -26,6 +26,11 @@ class PositionCalculator
     }
   end
 
+  # проверка есть ли уровень лояльности
+  def loyalty_eligible?
+    @product&.type != 'noloyalty'
+  end
+
   # общая стоимость без скидки
   def raw_sum
     @price * @quantity
