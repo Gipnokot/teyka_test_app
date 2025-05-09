@@ -6,6 +6,7 @@ gem 'json', '~> 2.11.3'
 gem 'sequel', '~> 5.0'
 gem 'sinatra', '>= 4.1.1'
 gem 'sqlite3', '~> 2.6'
+gem 'rake', '~> 13.2', '>= 13.2.1'
 
 group :test do
   gem 'factory_bot', '~> 6.5', '>= 6.5.1'
