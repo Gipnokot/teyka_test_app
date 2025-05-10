@@ -15,19 +15,18 @@
 
 Примеры запросов:
 
-```bash
 curl -X POST http://localhost:9292/operation \
   -H "Content-Type: application/json" \
   -d '{
     "user_id": 1,
-    "positions":[
+    "positions": [
       {"id": 2, "price": 50, "quantity": 2},
       {"id": 3, "price": 40, "quantity": 1},
       {"id": 4, "price": 150, "quantity": 2}
     ]
-  }'```bash
+  }'
+
 Ответ:
-```json
 {
   "status": "success",
   "user_info": {
@@ -74,14 +73,22 @@ curl -X POST http://localhost:9292/operation \
       "discount_value": 0.0,
       "cashback_percent": 0.0,
       "cashback_value": 0.0
-    }
-  ]
-}
-
-
+      
+Запрос на подтверждение операции:
 curl -X POST http://localhost:9292/submit \
   -H "Content-Type: application/json" \
   -d '{
-    "operation_id": 1, # вставить корректный operation_id из ответа первого запроса
+    "operation_id": 14,
     "write_off": 140.0
   }'
+  
+Ответ:                                      
+{
+  "status": "confirmed",
+  "operation_id": 14,
+  "user_id": 1,
+  "new_bonus_balance": "0.9242e4",
+  "cashback_applied": "0.7e1",
+  "write_off_applied": 140.0,
+  "final_price": "0.284e3"
+}
