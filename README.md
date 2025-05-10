@@ -15,6 +15,7 @@
 
 Примеры запросов:
 
+```bash
 curl -X POST http://localhost:9292/operation \
   -H "Content-Type: application/json" \
   -d '{
@@ -73,6 +74,9 @@ curl -X POST http://localhost:9292/operation \
       "discount_value": 0.0,
       "cashback_percent": 0.0,
       "cashback_value": 0.0
+    }
+  ]
+}
       
 Запрос на подтверждение операции:
 curl -X POST http://localhost:9292/submit \
@@ -81,7 +85,7 @@ curl -X POST http://localhost:9292/submit \
     "operation_id": 14,
     "write_off": 140.0
   }'
-  
+
 Ответ:                                      
 {
   "status": "confirmed",
