@@ -15,16 +15,7 @@
 
 Примеры запросов:
 
-curl -X POST http://localhost:9292/operation \
-  -H "Content-Type: application/json" \
-  -d '{
-    "user_id": 1,
-    "positions":[
-      {"id": 2, "price": 50, "quantity": 2},
-      {"id": 3, "price": 40, "quantity": 1},
-      {"id": 4, "price": 150, "quantity": 2}
-    ]
-  }'
+<pre lang="markdown"> ```bash curl -X POST http://localhost:9292/operation \ -H "Content-Type: application/json" \ -d '{ "user_id": 1, "positions": [ {"id": 2, "price": 50, "quantity": 2}, {"id": 3, "price": 40, "quantity": 1}, {"id": 4, "price": 150, "quantity": 2} ] }' ``` </pre>
 
 curl -X POST http://localhost:9292/submit \
   -H "Content-Type: application/json" \
